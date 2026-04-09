@@ -79,10 +79,14 @@ The API will be available at `http://localhost:5000` (or your configured port).
 
 ### Docker Setup
 
-Use the provided `compose.yaml` to spin up RavenDB:
+**Note: Docker support is currently under development and will be a feature in a future release.**
+
+For now, use the provided `compose.yaml` to spin up RavenDB only:
 ```bash
-docker-compose up -d
+docker-compose up -d ravendb
 ```
+
+The application itself should be run locally as described above.
 
 ## API Endpoints
 
@@ -198,4 +202,3 @@ MIT License
 ## Contributing
 
 [Contribution guidelines here]
-
