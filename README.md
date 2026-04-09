@@ -193,7 +193,7 @@ The project uses ASP.NET Core's minimal API approach for lightweight and efficie
 
 ## License
 
-[Your License Here]
+MIT License
 
 ## Contributing
 
