@@ -4,4 +4,15 @@
     build:
       context: .
       dockerfile: NVP/Dockerfile
+  ravendb:
+    image: ravendb/ravendb:latest
+    ports:
+      - "3789:3789"
+    environment:
+      - RAVEN_Setup_Mode=None
+      - RAVEN_License_Eula_Accepted=true
+    volumes:
+      - ravendb_data:/opt/RavenDB/Server/RavenData
 
+volumes:
+  ravendb_data:
