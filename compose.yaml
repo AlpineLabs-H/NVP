@@ -1,0 +1,7 @@
+﻿services:
+  nvp:
+    image: nvp
+    build:
+      context: .
+      dockerfile: NVP/Dockerfile
+
