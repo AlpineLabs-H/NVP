@@ -1,0 +1,5 @@
+C:\Users\henry\RiderProjects\NVP\NVP\bin\Release\net10.0\linux-x64\publish\appsettings.Development.json
+C:\Users\henry\RiderProjects\NVP\NVP\bin\Release\net10.0\linux-x64\publish\appsettings.json
+C:\Users\henry\RiderProjects\NVP\NVP\bin\Release\net10.0\linux-x64\publish\NVP.pdb
+C:\Users\henry\RiderProjects\NVP\NVP\bin\Release\net10.0\linux-x64\publish\libzstd.linux.x64.so
+C:\Users\henry\RiderProjects\NVP\NVP\bin\Release\net10.0\linux-x64\publish\NVP

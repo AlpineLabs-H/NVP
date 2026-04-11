@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  nvp:
+    build:
+      context: "C:\\Users\\henry\\RiderProjects\\NVP"
+      dockerfile: "NVP/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net10.0/NVP.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "nvp:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\henry\\RiderProjects\\NVP\\NVP:/app:rw"
+    - "C:\\Users\\henry\\RiderProjects\\NVP:/src:rw"
+    - "C:\\Users\\henry\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"
