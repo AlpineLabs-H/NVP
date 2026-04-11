@@ -1,6 +1,5 @@
 ﻿using Raven.Client.Documents.Session;
 using Raven.Client.Documents;
-using NVP;
 
 namespace NVP.Services;
 
@@ -16,8 +15,11 @@ public class Tools
     {
         using (IDocumentSession session = store.OpenSession())
         {
-            session.Store(model);
+            session.Store(model); 
             session.SaveChanges();
         }
     }
+    
+
+
 }
