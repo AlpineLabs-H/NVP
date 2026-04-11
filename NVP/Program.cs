@@ -2,12 +2,11 @@ using NVP.endPoints;
 using NVP.Infrastructure;
 using NVP.Services;
 using Raven.Client.Documents;
+using AspNet.Security.OAuth.GitHub;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IDocumentStore>(sp =>
 {
     var store = new DocumentStore
@@ -17,12 +16,29 @@ builder.Services.AddSingleton<IDocumentStore>(sp =>
     };
     return store.Initialize();
 });
+
 builder.Services.AddScoped<RavenDbService>();
 builder.Services.AddScoped<Tools>();
 
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    })
+    .AddCookie()
+    .AddGitHub(options =>
+    {
+        options.ClientId = builder.Configuration["GitHub:ClientId"]!;
+        options.ClientSecret = builder.Configuration["GitHub:ClientSecret"]!;
+        options.CallbackPath = "/auth/callback";
+        options.Scope.Add("read:user");
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapAuthEndpoints();
 app.MapPackageEndpoints();

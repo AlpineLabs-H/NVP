@@ -8,8 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="10.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4" />
         <PackageReference Include="RavenDB.Client" Version="7.2.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
     </ItemGroup>
 
     <ItemGroup>
