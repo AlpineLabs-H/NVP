@@ -11,6 +11,7 @@ A RESTful API-based package manager and plugin manager for Neovim. NVP allows yo
   - Neovim distribution (NVD)
 - **GitHub Integration**: Each plugin includes a GitHub URL pointing to an installation script
 - **RESTful API**: Simple HTTP endpoints for all operations
+- **Native CLI**: `nvp` command-line interface for searching, installing, and publishing packages
 - **RavenDB Integration**: Document-based NoSQL database for flexible data storage
 - **Future Authentication**: Built with extensibility for authentication support
 
@@ -19,6 +20,7 @@ A RESTful API-based package manager and plugin manager for Neovim. NVP allows yo
 - **Framework**: ASP.NET Core (.NET 10)
 - **Database**: RavenDB (Document Database)
 - **Language**: C#
+- **CLI**: C++ with libcurl and nlohmann/json
 
 ## Project Structure
 
@@ -45,6 +47,22 @@ NVP/
 
 - .NET 10 SDK
 - RavenDB instance (running on `http://192.168.1.20:8080`)
+- CMake 3.20 or newer
+- libcurl development libraries
+- nlohmann/json CMake package
+
+On Windows, install the CLI dependencies with a package manager such as `vcpkg`:
+
+```powershell
+vcpkg install curl nlohmann-json
+vcpkg integrate install
+```
+
+Then configure CMake with the correct toolchain file if needed:
+
+```powershell
+cmake -S NVP-CLI/NVP-CLI -B NVP-CLI/NVP-CLI/build -DCMAKE_TOOLCHAIN_FILE=C:/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake
+```
 
 ### Local Setup
 
@@ -76,6 +94,55 @@ NVP/
    ```
 
 The API will be available at `http://localhost:5000` (or your configured port).
+
+## NVP CLI
+
+The repository includes a native package manager CLI in `NVP-CLI/NVP-CLI`. The CLI uses the NVP API and stores a local configuration file with the API URL and key.
+
+### Build the CLI
+
+```bash
+cd NVP/NVP-CLI/NVP-CLI
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+On Windows, build the Release configuration explicitly if needed:
+
+```powershell
+cmake --build . --config Release
+```
+
+### Initialize the CLI
+
+```bash
+./nvp init [apiUrl] [apiKey]
+```
+
+If you do not already have an API key, visit:
+
+```bash
+http://localhost:5000/auth/login
+```
+
+and complete the GitHub login flow. The key is stored in `~/.nvpconfig` or in the file configured by `NVP_CONFIG`.
+
+### CLI Commands
+
+- `nvp init [apiUrl] [apiKey]`
+- `nvp search <name> <OS> <NVD>`
+- `nvp install <name> <OS> <NVD>`
+- `nvp publish <id> <name> <description> <URL> <author> <OS> <NVD>`
+
+### CLI Examples
+
+```bash
+./nvp search telescope linux nvchad
+./nvp install telescope linux nvchad
+./nvp publish telescope telescope.nvim "Fuzzy finder" "https://github.com/nvim-telescope/telescope.nvim" "nvim-telescope" linux nvchad
+```
 
 ### Docker Setup
 
